@@ -12,15 +12,16 @@ public class BaseController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    public <T> BaseResponse<T> sendResponse(String message) {
-        return new BaseResponse<>(true, message, null);
+    public <T> ResponseEntity<BaseResponse<T>> sendResponse(String message) {
+        BaseResponse<T> response = new BaseResponse<>(true, message, null);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    public ResponseEntity<BaseResponse<String>> sendError(String message) {
+    public ResponseEntity<BaseResponse<String>> notFound(String message) {
         return sendError(message, HttpStatus.NOT_FOUND);
     }
 
-    public ResponseEntity<BaseResponse<String>> sendError(String message, HttpStatus httpStatus) {
+    public <T>ResponseEntity<BaseResponse<String>> sendError(String message, HttpStatus httpStatus) {
         BaseResponse<String> response = new BaseResponse<>(false, message, null);
         return new ResponseEntity<>(response, httpStatus);
     }
